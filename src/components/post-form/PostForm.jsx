@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Button, Input, Select, RTE } from "../index";
 import appwriteService from "../../appwrite/config";
 import { useNavigate } from "react-router-dom";
-import { UseSelector, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 function PostForm({ post }) {
   const { register, handleSubmit, watch, setValue, control, getValues } =
@@ -69,12 +69,12 @@ function PostForm({ post }) {
   useEffect(() => {
     const subscription = watch((value, { name }) => {
       if (name === "title") {
-        setValue("slug", slugTransform(value.title, { shouldValidate: true }));
+        setValue("slug", slugTransform(value.title), { shouldValidate: true });
       }
     });
 
     return () => {
-      subscription.unsubsribe();
+      subscription.unsubscribe();
     };
   }, [watch, slugTransform, setValue]);
 
