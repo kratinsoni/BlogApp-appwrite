@@ -3,5 +3,20 @@ import Footer from "./footer/footer";
 import Container from "./container/Container";
 import Logo from "./Logo";
 import LogoutBtn from "./header/LogoutBtn";
+import RTE from "./RTE";
+import Signup from "./Signup";
+import Login from "./Login";
+import PostForm from "./post-form/PostForm";
+import PostCard from "./PostCard";
 
-export { Header, Footer, Container, Logo };
+export {
+  Header,
+  Footer,
+  Container,
+  Logo,
+  RTE,
+  Signup,
+  Login,
+  PostForm,
+  PostCard,
+};
