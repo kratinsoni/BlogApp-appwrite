@@ -68,7 +68,7 @@ export class Service {
 
   async getPost(slug) {
     try {
-      return await this.databases.getPost(
+      return await this.databases.getDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         slug
@@ -94,7 +94,11 @@ export class Service {
 
   async uploadFile(file) {
     try {
-      return this.await.createFile(conf.appwriteBucketId, ID.unique(), file);
+      return await this.bucket.createFile(
+        conf.appwriteBucketId,
+        ID.unique(),
+        file
+      );
     } catch (error) {
       console.log("Appwrite Service :: uploadFile :: error", error);
 

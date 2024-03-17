@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import authService from "./appwrite/auth";
 import { login, logout } from "./store/authSlice.js";
 import { Header, Footer } from "./components/index.js";
+import { Outlet } from "react-router-dom";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -27,7 +28,7 @@ function App() {
       <div className="min-h-screen flex-wrap content-between bg-gray-400">
         <div className="block w-full">
           <Header />
-          <main>TODO: {/* <Outlet/> */}</main>
+          TODO: <Outlet />
           <Footer />
         </div>
       </div>

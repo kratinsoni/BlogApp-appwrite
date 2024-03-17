@@ -10,7 +10,7 @@ function PostForm({ post }) {
     useForm({
       defaultValues: {
         title: post?.title || "",
-        slug: post?.slug || "",
+        slug: post?.$id || "",
         content: post?.content || "",
         status: post?.status || "active",
       },
@@ -37,7 +37,7 @@ function PostForm({ post }) {
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
-      const file = await appwriteService.updateFile(data.image[0]);
+      const file = await appwriteService.uploadFile(data.image[0]);
 
       if (file) {
         const fileId = file.$id;
@@ -55,16 +55,15 @@ function PostForm({ post }) {
   };
 
   const slugTransform = useCallback((value) => {
-    if (value && typeof value === "String") {
+    if (value && typeof value === "string")
       return value
         .trim()
         .toLowerCase()
-        .replace(/^[a-zA-Z\d\s]+/g, "-")
+        .replace(/[^a-zA-Z\d\s]+/g, "-")
         .replace(/\s/g, "-");
-    }
 
     return "";
-  });
+  }, []);
 
   useEffect(() => {
     const subscription = watch((value, { name }) => {
