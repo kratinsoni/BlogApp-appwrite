@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 import authService from "./appwrite/auth";
-import appwriteService from "./appwrite/config.js"
+import appwriteService from "./appwrite/config.js";
 import { login, logout } from "./store/authSlice.js";
 import { Header, Footer } from "./components/index.js";
 import { Outlet } from "react-router-dom";
@@ -18,10 +18,10 @@ function App() {
         if (userData) {
           dispatch(login({ userData }));
           appwriteService.getPosts([]).then((posts) => {
-            if(posts){
+            if (posts) {
               dispatch(storePosts(posts.documents));
             }
-          })
+          });
         } else {
           dispatch(logout());
           dispatch(removePosts());
