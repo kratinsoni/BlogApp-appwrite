@@ -2,7 +2,7 @@ import React from "react";
 
 function Button({
   children,
-  type = "buttton",
+  type = "button",
   bgColor = "bg-blue-600",
   textColor = "text-white",
   className = "",

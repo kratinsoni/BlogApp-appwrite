@@ -1,9 +1,11 @@
 import { useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 import authService from "./appwrite/auth";
+import appwriteService from "./appwrite/config.js"
 import { login, logout } from "./store/authSlice.js";
 import { Header, Footer } from "./components/index.js";
 import { Outlet } from "react-router-dom";
+import { removePosts, storePosts } from "./store/postSlice.js";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -15,8 +17,14 @@ function App() {
       .then((userData) => {
         if (userData) {
           dispatch(login({ userData }));
+          appwriteService.getPosts([]).then((posts) => {
+            if(posts){
+              dispatch(storePosts(posts.documents));
+            }
+          })
         } else {
           dispatch(logout());
+          dispatch(removePosts());
         }
       })
       .finally(() => setLoading(false));
@@ -27,7 +35,7 @@ function App() {
       <div className="min-h-screen flex-wrap content-between bg-gray-400">
         <div className="block w-full">
           <Header />
-          TODO: <Outlet />
+          <Outlet />
           <Footer />
         </div>
       </div>
